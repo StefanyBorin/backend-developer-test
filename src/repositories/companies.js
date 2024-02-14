@@ -5,4 +5,12 @@ const searchByCompanies = async () => {
     return existCompanies;
 };
 
-module.exports = { searchByCompanies };
+const searchCompanyById = async id => {
+    const companies = await dataBase('companies').where({ id }).first();
+    return companies;
+};
+
+module.exports = {
+    searchByCompanies,
+    searchCompanyById,
+};
