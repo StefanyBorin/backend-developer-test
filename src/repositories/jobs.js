@@ -21,4 +21,22 @@ const insertAJob = async ({
     return job;
 };
 
-module.exports = insertAJob;
+const updateAjob = async ({ id, title, description, location }) => {
+    console.log(id);
+    const postingJob = await dataBase('jobs')
+        .where({ id })
+        .update({ title, description, location })
+        .returning('*');
+    return postingJob;
+};
+
+const fetchPostingById = async id => {
+    const posting = await dataBase('jobs').where({ id }).first();
+    return posting;
+};
+
+module.exports = {
+    insertAJob,
+    updateAjob,
+    fetchPostingById,
+};
