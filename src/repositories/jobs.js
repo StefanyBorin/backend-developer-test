@@ -35,8 +35,14 @@ const fetchPostingById = async id => {
     return posting;
 };
 
+const removeJobPosting = async id => {
+    const removeDataBase = await dataBase('jobs').where({ id });
+    return removeDataBase;
+};
+
 module.exports = {
     insertAJob,
     updateAjob,
     fetchPostingById,
+    removeJobPosting,
 };
