@@ -1,5 +1,5 @@
 const { searchCompanyById } = require('../../repositories/companies');
-const insertAJob = require('../../repositories/jobs');
+const { insertAJob } = require('../../repositories/jobs');
 
 const createAJob = async (req, res) => {
     const { company_id, title, description, location, notes, status } =
@@ -19,7 +19,7 @@ const createAJob = async (req, res) => {
         });
         return res.status(201).json(jobPosting);
     } catch (error) {
-        console.log(error.message);
+        
         return res.status(500).json({ mensagem: 'Internal Server Error' });
     }
 };
