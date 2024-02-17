@@ -23,7 +23,7 @@ const updateStatusPublish = async (req, res) => {
             status: newStatus,
         });
 
-        return res.status(201).json(newStatus);
+        return res.status(201).json(newStatus[0]);
     } catch (error) {
         if (
             error.message.includes(
