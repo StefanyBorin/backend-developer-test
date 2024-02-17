@@ -16,11 +16,12 @@ const updateStatusPublish = async (req, res) => {
         const { status } = postingExist;
 
         if (status.toLowerCase() === statusPublished.toLowerCase()) {
-            res.status(400).json({ message: 'Job already posted' });
+            return res.status(400).json({ message: 'Job already posted' });
         }
+
         const newStatus = await editStatusPosting({
             id: job_id,
-            status: newStatus,
+            status: statusPublished,
         });
 
         return res.status(201).json(newStatus[0]);
