@@ -19,7 +19,6 @@ const updatePostingJob = async (req, res) => {
 
         return res.status(201).json(newPosting[0]);
     } catch (error) {
-        console.log(error.message);
         if (
             error.message.includes(
                 'sintaxe de entrada é inválida para tipo uuid',
