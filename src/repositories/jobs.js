@@ -22,7 +22,6 @@ const insertAJob = async ({
 };
 
 const updateAjob = async ({ id, title, description, location }) => {
-    console.log(id);
     const postingJob = await dataBase('jobs')
         .where({ id })
         .update({ title, description, location })
