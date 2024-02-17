@@ -36,8 +36,16 @@ const fetchPostingById = async id => {
 };
 
 const removeJobPosting = async id => {
-    const removeDataBase = await dataBase('jobs').where({ id });
+    const removeDataBase = await dataBase('jobs').where({ id }).del();
     return removeDataBase;
+};
+
+const editStatusPosting = async ({ id, status }) => {
+    const edit = await dataBase('jobs')
+        .where({ id })
+        .update({ status })
+        .returning('*');
+    return edit;
 };
 
 module.exports = {
@@ -45,4 +53,5 @@ module.exports = {
     updateAjob,
     fetchPostingById,
     removeJobPosting,
+    editStatusPosting,
 };
