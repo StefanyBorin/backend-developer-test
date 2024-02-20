@@ -9,6 +9,7 @@ const updatePostingJob = require('../controllers/jobs/updatePostingJob');
 const deletePostingJob = require('../controllers/jobs/deletePostingJob');
 const updateStatusPublish = require('../controllers/jobs/updateStatusPublish');
 const updateStatusArchive = require('../controllers/jobs/updateStatusArchive');
+const feedPublishJobs = require('../controllers/jobs/feedPublishJobs');
 
 const routesJobs = Router();
 
@@ -21,5 +22,5 @@ routesJobs.put(
 routesJobs.delete('/job/:job_id', deletePostingJob);
 routesJobs.put('/job/:job_id/publish', updateStatusPublish);
 routesJobs.put('/job/:job_id/archive', updateStatusArchive)
-
+routesJobs.get('/feed', feedPublishJobs)
 module.exports = routesJobs;
