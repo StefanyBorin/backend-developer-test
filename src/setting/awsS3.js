@@ -1,19 +1,3 @@
-//const AWS = require('aws-sdk');
-
-// const endpoint = new Endpoint(process.env.KEY_ENDPOINT_BUKET);
-// const s3 = new S3({
-//     endpoint,
-//     credentials:{
-
-//     }
-// });
-
-// const awsConfig = AWS.config.update({
-//   accessKeyId: 'AKIASXCHX3RGFF2HA2DK',
-//   secretAccessKey: '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',
-//   region: 'us-east-1',
-// });
-
 const AWS = require('aws-sdk');
 
 AWS.config.update({
