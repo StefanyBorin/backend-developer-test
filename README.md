@@ -1,80 +1,261 @@
-# Backend Developer Technical Assessment
+# Avaliação técnica do desenvolvedor back-end
 
-## Welcome!
+Participar do teste técnico da Plooral foi uma experiência emocionante, desafiadora e inspiradora. A construção da API usando Node.js, Postgres, Express e a conexão em usar AWS service evidenciaram a cultura inovadora da empresa, que está em sintonia com meus objetivos profissionais. A oportunidade de aplicar meus conhecimento reforçou meu entusiasmo em contribuir para projetos significativos junto a essa equipe incrivel. Estou animada com a possibilidade de integrar a equipe, crescer profissionalmente e colaborar para soluções impactantes.
+Abaixo irei descrever para como foi a construção e as maneiras de uso da aplicação.
+Agradeço pela chance e aguardo ansiosamente o retorno com a oportunidade de fazer parte dessa equipe dedicada.
 
-We're excited to have you participate in our Backend Developer technical assessment. This test is designed to gauge your expertise in backend development, with a focus on architectural and organizational skills. Below, you'll find comprehensive instructions to set up and complete the project. Remember, completing every step is not mandatory; some are optional but can enhance your application.
+## Descrição do Teste
 
-## Assessment Overview
+A aplicação consiste em gerenciamento de anúncios de emprego, criando endpoints funcionais e coerentes.
 
-Your task is to develop a NodeJS API for a job posting management application. Analyze the application details and use cases, and translate them into functional endpoints.
+## Tecnologias utilizadas:
 
-### Application Components
+-   Javascript
+-   Node.js (versão: 20.6.1) [Documentação oficial Node.js](https://nodejs.org/docs/latest/api/)
+-   Postgres (Versão: 16)
 
-Your solution should incorporate the following components and libraries:
+## Bibliotecas:
 
-1. **Relational Database**: Utilize a SQL database (PostgreSQL 16) with two tables (`companies` and `jobs`). The DDL script in the `ddl` folder of this repository initializes these tables. The `companies` table is pre-populated with fictitious records, which you should not modify. Focus on managing records in the `jobs` table. You don't need to worry about setting up the database, consider the database is already running in the cloud. Your code only needs to handle database connections. To test your solution, use your own database running locally or in the server of your choice.
+-   Express (versão: 4.18.2) -> [Documentação](https://expressjs.com/)
+-   Pg (versão: 8.11.3) -> [Documentação](https://node-postgres.com/)
+-   Knex(versão: 3.1.0) -> [Documentação](https://knexjs.org/)
+-   Cors (versão: 2.8.5) -> [Documentação](https://www.npmjs.com/package/cors)
+-   Dotenv (versão: 16.4.2) -> [Documentação](https://www.npmjs.com/package/dotenv#%EF%B8%8F-usage)
+-   Joi (versão: 17.12.1) -> [Documentação](https://joi.dev/)
+-   Aws- sdk (versão: 2.1560.0) -> [Documentação](https://aws.amazon.com/pt/sdk-for-javascript/)
 
-2. **REST API**: Develop using NodeJS (version 20) and ExpressJS. This API will manage the use cases described below.
+### Dependencias de desenvolvimento:
 
-3. **Serverless Environment**: Implement asynchronous, event-driven logic using AWS Lambda and AWS SQS for queue management.
+-   nodemon (versão: 3.0.3) -> [Documentação](https://www.npmjs.com/package/nodemon)
+-   prettier (versão: 3.2.5) -> [Documentação](https://prettier.io/docs/en/)
 
-4. **Job Feed Repository**: Integrate a job feed with AWS S3. This feed should periodically update a JSON file reflecting the latest job postings.
+### Ferramentas utilizadas:
 
-### User Actions
+-   Insomnia -> [Documentação](https://docs.insomnia.rest/insomnia/get-started)
+-   Visual Studio Code
+-   Beekeeper Studio
 
-Convert the following use cases into API endpoints:
+## Como usar:
 
-- `GET /companies`: List existing companies.
-- `GET /companies/:company_id`: Fetch a specific company by ID.
-- `POST /job`: Create a job posting draft.
-- `PUT /job/:job_id/publish`: Publish a job posting draft.
-- `PUT /job/:job_id`: Edit a job posting draft (title, location, description).
-- `DELETE /job/:job_id`: Delete a job posting draft.
-- `PUT /job/:job_id/archive`: Archive an active job posting.
+### [Link do Repositório](https://github.com/StefanyBorin/backend-developer-test/tree/stefany_celeste_borin)
 
-### Integration Features
+#### 1° Faça um fork do repositório e clone em sua máquina, abra o terminal em uma pasta e digite um dos comandos a seguir de acordo com a chave configurada do seu GIT:
 
-- Implement a `GET /feed` endpoint to serve a job feed in JSON format, containing published jobs (column `status = 'published'`). Use a caching mechanism to handle high traffic, fetching data from an S3 file updated periodically by an AWS Lambda function. The feed should return the job ID, title, description, company name and the date when the job was created. This endpoint should not query the database, the content must be fetched from S3.
-- This endpoint receives a massive number of requests every minute, so the strategy here is to implement a simple cache mechanism that will fetch a previously stored JSON file containing the published jobs and serve the content in the API. You need to implement a serverless component using AWS Lambda, that will periodically query the published jobs and store the content on S3. The `GET /feed` endpoint should fetch the S3 file and serve the content. You don't need to worry about implementing the schedule, assume it is already created using AWS EventBridge. You only need to create the Lambda component, using NodeJS 20 as a runtime.
+#### Chave ssh:
 
-### Extra Feature (Optional)
+```bash
+git clone git@github.com:StefanyBorin/backend-developer-test.git
+```
 
-- **Job Moderation**: using artificial intelligence, we need to moderate the job content before allowing it to be published, to check for potential harmful content.
-Every time a user requests a job publication (`PUT /job/:job_id/publish`), the API should reply with success to the user, but the job should not be immediately published. It should be queued using AWS SQS, feeding the job to a Lambda component.
-Using OpenAI's free moderation API, create a Lambda component that will evaluate the job title and description, and test for hamrful content. If the content passes the evaluation, the component should change the job status to `published`, otherwise change to `rejected` and add the response from OpenAI API to the `notes` column.
+#### Chave HTTPS:
 
-### Bonus Questions
+```bash
+ git clone https://github.com/StefanyBorin/backend-developer-test.git
+```
 
-1. Discuss scalability solutions for the job moderation feature under high load conditions. Consider that over time the system usage grows significantly, to the point where we will have thousands of jobs published every hour. Consider the API will be able to handle the requests, but the serverless component will be overwhelmed with requests to moderate the jobs. This will affect the database connections and calls to the OpenAI API. How would you handle those issues and what solutions would you implement to mitigate the issues?
-2. Propose a strategy for delivering the job feed globally with sub-millisecond latency. Consider now that we need to provide a low latency endpoint that can serve the job feed content worldwide. Using AWS as a cloud provider, what technologies would you need to use to implement this feature and how would you do it?
+#### 2° Abra no VScode e no terminal digite o seguinte comando:
 
-## Instructions
+```
+npm install
+```
 
-1. Fork this repository and create a branch named after yourself.
-2. Develop the solution in your branch.
-3. Use your AWS account or other environment of your choice to test and validate your solution.
-4. Update the README with setup and execution instructions.
-5. Complete your test by sending a message through the Plooral platform with your repository link and branch name.
+3° No terminal use o comando a seguir para usar a sua máquina como servidor e subir a aplicação.
 
-## Evaluation Criteria
+```
+npm run dev
+```
 
-We will assess:
+Logo após executar esses comandos sua aplicação estará rodando no no seu servidor local.
 
-- Knowledge of JavaScript, Node.js, Express.js.
-- Proficiency with serverless components (Lambda, SQS).
-- Application structure and layering.
-- Effective use of environment variables.
-- Implementation of unit tests, logging, and error handling.
-- Documentation quality and code readability.
-- Commit history and overall code organization.
+## ENDPOINTS
 
-Good luck, and we're looking forward to seeing your innovative solutions!
-Implementation of the user actions and integration features is considered mandatory for the assessment. The extra feature and the bonus questions are optional, but we encourage you to complete them as well, it will give you an additional edge over other candidates.
+### 1 - Buscar todas as empresas cadastradas.
 
-## A Note on the Use of AI Tools
+Método HTTP - <span style="color:orange;">GET</span>
 
-In today's evolving tech landscape, AI tools such as ChatGPT and GitHub Copilot have become valuable resources for developers. We recognize the potential of these tools in aiding problem-solving and coding. While we do not prohibit the use of AI in this assessment, we encourage you to primarily showcase your own creativity and problem-solving skills. Your ability to think critically and design solutions is what we're most interested in.
+URL - http://localhost:3000/companies
 
-That said, if you do choose to utilize AI tools, we would appreciate it if you could share details about this in your submission. Include the prompts you used, how you interacted with the AI, and how it influenced your development process. This will give us additional insight into your approach to leveraging such technologies effectively.
+Resposta:
 
-Remember, this assessment is not just about getting to the solution, but also about demonstrating your skills, creativity, and how you navigate and integrate the use of emerging technologies in your work.
+```json
+status code: 200
+[
+    {
+        "id": "3b00b009-51d7-470c-bc2a-fdd26128aed8",
+        "name": "ABC Corp",
+        "created_at": "2024-02-12T23:01:18.080Z",
+        "updated_at": "2024-02-12T23:01:18.080Z"
+    },
+    {
+        "id": "35c53fb7-f278-422f-a25f-22eef0565990",
+        "name": "XYZ LLC",
+        "created_at": "2024-02-12T23:01:18.080Z",
+        "updated_at": "2024-02-12T23:01:18.080Z"
+    },
+    {
+        "id": "d455b8de-b7ce-4d24-82d4-3d8479efc405",
+        "name": "ACME Enterprises",
+        "created_at": "2024-02-12T23:01:18.080Z",
+        "updated_at": "2024-02-12T23:01:18.080Z"
+    }
+]
+```
+
+<BR><BR>
+
+### 2 - Busque uma empresa específica por ID.
+
+Método HTTP - <span style="color:orange;">GET</span>
+
+URL - http://localhost:3000/companies/:company_id
+
+Resposta:
+
+```json
+status code: 200
+{
+	"id": "35c53fb7-f278-422f-a25f-22eef0565990",
+	"name": "XYZ LLC",
+	"created_at": "2024-02-12T23:01:18.080Z",
+	"updated_at": "2024-02-12T23:01:18.080Z"
+}
+```
+
+<BR><BR>
+
+### 3 - Crie um rascunho de anúncio de emprego.
+
+Método HTTP - <span style="color:orange;">POST</span>
+
+URL - http://localhost:3000/job
+
+Resposta:
+
+```json
+
+status code: 201
+{
+	"id": "49e54b64-df96-447a-afad-7027d025bcd9",
+	"company_id": "d455b8de-b7ce-4d24-82d4-3d8479efc405",
+	"title": "Desenvolvedor Backend 24",
+	"description": "mkm",
+	"location": "São Paulo",
+	"notes": "",
+	"status": "draft",
+	"created_at": "2024-02-22T20:00:27.158Z",
+	"updated_at": "2024-02-22T20:00:27.158Z"
+}
+```
+
+<BR><BR>
+
+### 4 - Editar status da publicação para Published (publique um rascunho de anúncio de emprego.)
+
+Método HTTP - <span style="color:orange;">PUT</span>
+
+URL - http://localhost:3000/job/job_id/publish
+
+Resposta:
+
+```json
+
+status code: 201
+{
+	"message": "successfully published"
+}
+```
+
+<BR>
+<BR>
+
+### 5 - Arquivar um anúncio de emprego ativo.
+
+Método HTTP - <span style="color:orange;">PUT</span>
+
+URL - http://localhost:3000/job/job_id/archive
+
+Resposta:
+
+```json
+
+status code: 201
+{
+	"message": "successfully archived"
+}
+```
+
+<BR>
+<BR>
+
+### 6 - Edite um rascunho de anúncio de emprego (título, local, descrição).
+
+Método HTTP - <span style="color:orange;">PUT</span>
+
+URL - http://localhost:3000/job/:job_id
+
+Resposta:
+
+```json
+
+status code: 201
+{
+	"message": "Data updated successfully"
+}
+```
+
+<br> <br>
+
+### 7 - Exclua um rascunho de anúncio de emprego.
+
+Método HTTP - <span style="color:orange;">DELETE</span>
+
+URL - http://localhost:3000/job/:job_id
+
+Resposta:
+
+```json
+
+status code: 201
+{
+	"message": "Successfully deleted post"
+}
+```
+
+### 8 - Feed de anúncios de empregos com status 'published'
+
+Método HTTP - <span style="color:orange;">GET</span>
+
+URL - http://localhost:3000/feed
+
+Resposta:
+
+```json
+
+status code: 200
+[
+    {
+	"id": "59403d1e-3cad-409e-8b04-69e01a721545",
+	"title": "Desenvolvedor Backend",
+	"company_name": "XYZ LLC",
+	"description": "Trabalhar com node.js",
+	"created_at": "2024-02-12 20:39:37.033951-03"
+    },
+    {
+	"id": "59403d1e-3cad-409e-8b04-69e01a721546",
+	"title": "Desenvolvedor Backend 2",
+	"company_name": "ABC Corp",
+	"description": "Trabalhar com node.js",
+	"created_at": "2024-02-12 20:39:37.033951-03"
+    }
+]
+```
+
+## Variáveis de Ambiente
+
+Importante: Para rotar a aplicação precisa configurar as variaveis de ambiente com os dados do seu banco de dados e a sua conexão S3 AWS.
+
+No arquivo `.env.exemple` tem o modelo das variaveis que precisa ser adicionada no arquivo `.env`. Copie o modelo `.env.exemple` e cole no `.env` subistituindo pelas informações correspondentes.
+
+## Utilizando no Insomnia
+
+<img src="./gif/gif-insominia.gif">
