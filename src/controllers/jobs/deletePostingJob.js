@@ -17,8 +17,8 @@ const deletePostingJob = async (req, res) => {
         if (!removingAPost) {
             return res.status(400).json({ mensagem: 'Error deleting post' });
         }
-        
-        return res.status(200).json();
+
+        return res.status(200).json({ message: 'Successfully deleted post' });
     } catch (error) {
         if (
             error.message.includes(

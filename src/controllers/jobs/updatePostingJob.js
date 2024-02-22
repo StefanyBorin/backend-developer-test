@@ -10,14 +10,16 @@ const updatePostingJob = async (req, res) => {
         if (!postingExist) {
             return res.status(400).json({ mensagem: 'Posting does not exist' });
         }
-        const newPosting = await updateAjob({
+        await updateAjob({
             id: job_id,
             title,
             description,
             location,
         });
 
-        return res.status(201).json(newPosting[0]);
+        return res.status(201).json({
+            message: 'Data updated successfully',
+        });
     } catch (error) {
         if (
             error.message.includes(

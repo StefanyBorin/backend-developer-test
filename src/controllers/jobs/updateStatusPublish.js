@@ -24,7 +24,7 @@ const updateStatusPublish = async (req, res) => {
             status: statusPublished,
         });
 
-        return res.status(201).json(newStatus[0]);
+        return res.status(201).json({ message: 'successfully published' });
     } catch (error) {
         if (
             error.message.includes(
