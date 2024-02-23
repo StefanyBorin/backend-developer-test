@@ -37,7 +37,7 @@ A aplicação consiste em gerenciamento de anúncios de emprego, criando endpoin
 
 ## Como usar:
 
-### [Link do Repositório](https://github.com/StefanyBorin/backend-developer-test/tree/stefany_celeste_borin)
+### 🔗 [Link do Repositório](https://github.com/StefanyBorin/backend-developer-test/tree/stefany_celeste_borin)
 
 #### 1° Faça um fork do repositório e clone em sua máquina, abra o terminal em uma pasta e digite um dos comandos a seguir de acordo com a chave configurada do seu GIT:
 
@@ -215,7 +215,7 @@ Resposta:
 
 ```json
 
-status code: 201
+status code: 200
 {
 	"message": "Successfully deleted post"
 }
