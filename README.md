@@ -6,7 +6,7 @@ Agradeço pela chance e aguardo ansiosamente o retorno com a oportunidade de faz
 
 ## Descrição do Teste
 
-A aplicação consiste em gerenciamento de anúncios de emprego, criando endpoints funcionais e coerentes.
+A aplicação consiste em gerenciamento de anúncios de emprego, criando endpoints funcionais e coerentes. Com o uso de AWS Lambda e S3.
 
 ## Tecnologias utilizadas:
 
@@ -221,7 +221,7 @@ status code: 200
 }
 ```
 
-### 8 - Feed de anúncios de empregos com status 'published'
+### 8 - Feed de anúncios de empregos com status 'published' - AWS lambda e S3.
 
 Método HTTP - <span style="color:orange;">GET</span>
 
